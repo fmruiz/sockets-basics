@@ -5,8 +5,12 @@ const io = require('socket.io')(server);
 
 app.use(express.static(__dirname + '/public'))
 
-io.on('connection', () => { 
-    console.log('Cliente conectado')
+io.on('connection', (socket) => {
+
+    socket.on('message-to-server', (data) => {
+        io.emit('message-from-server', data)
+    })
+
 });
 
 server.listen(8080, () => {
