@@ -1,10 +1,13 @@
-
-
-const app = require('express')();
+const express = require('express');
+const app = express();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
-io.on('connection', () => { /* … */ });
+app.use(express.static(__dirname + '/public'))
+
+io.on('connection', () => { 
+    console.log('Cliente conectado')
+});
 
 server.listen(8080, () => {
     console.log(`Server ON in port 8080`)
